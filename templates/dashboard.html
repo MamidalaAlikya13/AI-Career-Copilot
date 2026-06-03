@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-10">
+
+    <h2 class="mb-3">
+      Welcome, {{ user.username }}! 👋
+    </h2>
+
+    <p class="lead">
+      Email: {{ user.email }}
+    </p>
+
+    <p>
+      This is your AI Career Copilot Dashboard.
+      Analyze resumes, chat with AI mentors, and generate career roadmaps.
+    </p>
+
+    <hr>
+
+    <div class="mt-4">
+
+      <div class="mt-4 d-flex flex-wrap gap-3">
+
+  <a class="btn btn-primary btn-lg" href="/upload_resume">
+      📄 Upload Resume
+  </a>
+
+  <a class="btn btn-success btn-lg" href="/chat">
+      🤖 AI Mentor Chat
+  </a>
+
+  <a class="btn btn-warning btn-lg text-dark" href="/roadmap">
+      🚀 Career Roadmap
+  </a>
+
+  <a class="btn btn-danger btn-lg" href="/mock-interview">
+      🎤 Mock Interview
+  </a>
+
+  <a class="btn btn-dark btn-lg" href="/interview-history">
+      📊 Interview History
+  </a>
+
+  <a class="btn btn-info btn-lg text-white" href="/analytics">
+      📈 Analytics
+  </a>
+
+  <a class="btn btn-secondary btn-lg" href="/project-recommender">
+      💡 Project Recommender
+  </a>
+
+  <a class="btn btn-outline-primary btn-lg" href="/portfolio-generator">
+      🌐 Portfolio Generator
+  </a>
+
+  <a class="btn btn-info btn-lg text-white" href="/skill-gap">
+      🎯 Skill Gap Analyzer
+  </a>
+
+  <a class="btn btn-dark btn-lg" href="/about">
+      ℹ️ About Project
+  </a>
+
+</div>
+
+    </div>
+
+    <div class="row mt-5">
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h4>📄 Resume Analyzer</h4>
+          <p>
+            Upload your resume and get ATS score,
+            skill analysis, and recommendations.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h4>🤖 AI Mentor</h4>
+          <p>
+            Ask career questions and receive
+            AI-powered guidance and roadmaps.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h4>🚀 Career Roadmap</h4>
+          <p>
+            Generate personalized learning plans
+            based on your dream role.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

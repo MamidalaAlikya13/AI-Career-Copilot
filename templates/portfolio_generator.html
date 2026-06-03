@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2>🌐 Portfolio Generator</h2>
+  <p class="text-muted">Generate a professional portfolio webpage instantly.</p>
+
+  <form method="POST" class="card shadow-sm p-4">
+
+    <input class="form-control mb-3" name="name" placeholder="Your Name" required>
+
+    <input class="form-control mb-3" name="title" placeholder="Example: Aspiring AI Engineer | Full Stack Developer" required>
+
+    <textarea class="form-control mb-3" name="about" rows="4" placeholder="Write about yourself" required></textarea>
+
+    <textarea class="form-control mb-3" name="skills" rows="3" placeholder="Skills: Python, Flask, SQL, HTML, CSS, JavaScript" required></textarea>
+
+    <textarea class="form-control mb-3" name="projects" rows="4" placeholder="Projects: AI Career Copilot, Resume Analyzer..." required></textarea>
+
+    <textarea class="form-control mb-3" name="education" rows="3" placeholder="Education details" required></textarea>
+
+    <textarea class="form-control mb-3" name="certificates" rows="3" placeholder="Certificates: Python, AI/ML Workshop, IEEE Presentation"></textarea>
+
+    <input class="form-control mb-3" name="email" placeholder="Email" required>
+
+    <input class="form-control mb-3" name="github" placeholder="GitHub Profile Link">
+
+    <input class="form-control mb-3" name="linkedin" placeholder="LinkedIn Profile Link">
+
+    <button class="btn btn-primary" type="submit">
+      Generate Portfolio
+    </button>
+
+    <a href="/dashboard" class="btn btn-secondary mt-2">
+      Back
+    </a>
+
+  </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>🎤 Interview History</h2>
+
+    <hr>
+
+    {% if interviews %}
+
+    <table class="table table-striped">
+
+        <thead>
+
+            <tr>
+                <th>Date</th>
+                <th>Role</th>
+                <th>Difficulty</th>
+                <th>Score</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for interview in interviews %}
+
+            <tr>
+
+                <td>
+                    {{ interview.created_at.strftime('%d-%m-%Y') }}
+                </td>
+
+                <td>
+                    {{ interview.role }}
+                </td>
+
+                <td>
+                    {{ interview.difficulty }}
+                </td>
+
+                <td>
+                    {{ interview.score }}/10
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-info">
+        No interview attempts found.
+    </div>
+
+    {% endif %}
+
+    <a href="/dashboard" class="btn btn-secondary">
+        Back to Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

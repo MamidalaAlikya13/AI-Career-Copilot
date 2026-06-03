@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2>🎤 Mock Interview</h2>
+  <p class="text-muted">Practice interview questions and get instant scoring.</p>
+
+  <div class="card shadow-sm p-4 mb-4">
+    <form method="POST">
+
+      <input type="hidden" name="action" value="generate">
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Role</label>
+          <select class="form-select" name="role" required>
+            <option value="">Choose role</option>
+            <option>Full Stack Developer</option>
+            <option>Python Developer</option>
+            <option>AI Engineer</option>
+            <option>Data Analyst</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Difficulty</label>
+          <select class="form-select" name="difficulty" required>
+            <option value="">Choose difficulty</option>
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button class="btn btn-danger" type="submit">
+        Generate Questions
+      </button>
+
+      <a class="btn btn-secondary" href="/dashboard">
+        Back
+      </a>
+
+    </form>
+  </div>
+
+  {% if questions and score is none %}
+  <div class="card shadow-sm p-4">
+
+    <h4>Questions</h4>
+
+    <form method="POST">
+
+      <input type="hidden" name="action" value="submit">
+      <input type="hidden" name="role" value="{{ role }}">
+      <input type="hidden" name="difficulty" value="{{ difficulty }}">
+
+      {% for q in questions %}
+        <div class="mb-4">
+          <label class="form-label">
+            <strong>{{ loop.index }}. {{ q }}</strong>
+          </label>
+
+          <input type="hidden" name="questions" value="{{ q }}">
+
+          <textarea
+            class="form-control"
+            name="answers"
+            rows="4"
+            placeholder="Type your answer here..."
+            required></textarea>
+        </div>
+      {% endfor %}
+
+      <button class="btn btn-success" type="submit">
+        Submit Interview
+      </button>
+
+    </form>
+
+  </div>
+  {% endif %}
+
+  {% if score is not none %}
+  <div class="card shadow-sm p-4 mt-4">
+
+    <h3>Interview Result</h3>
+
+    <h1 class="text-primary">
+      Score: {{ score }}/10
+    </h1>
+
+    {% if score >= 8 %}
+      <p class="text-success">Excellent performance! You are interview-ready.</p>
+    {% elif score >= 5 %}
+      <p class="text-warning">Good attempt. Improve explanation and examples.</p>
+    {% else %}
+      <p class="text-danger">Needs improvement. Practice basic concepts clearly.</p>
+    {% endif %}
+
+    <hr>
+
+    <h4>Detailed Feedback</h4>
+
+    {% for item in feedback %}
+      <div class="border rounded p-3 mb-3">
+        <p><strong>Question:</strong> {{ item.question }}</p>
+        <p><strong>Your Answer:</strong> {{ item.answer }}</p>
+        <p><strong>Marks:</strong> {{ item.marks }}/2</p>
+        <p><strong>Feedback:</strong> {{ item.message }}</p>
+      </div>
+    {% endfor %}
+
+    <a class="btn btn-danger" href="/mock-interview">
+      Try Again
+    </a>
+
+    <a class="btn btn-secondary" href="/dashboard">
+      Back to Dashboard
+    </a>
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

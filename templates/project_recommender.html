@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2>💡 Project Recommender</h2>
+  <p class="text-muted">Get project ideas based on your career goal.</p>
+
+  <div class="card shadow-sm p-4">
+
+    <form method="POST">
+
+      <label class="form-label">Select Your Career Goal</label>
+
+      <select class="form-select mb-3" name="goal" required>
+        <option value="">Choose goal</option>
+        <option>AI Engineer</option>
+        <option>Full Stack Developer</option>
+        <option>Data Analyst</option>
+        <option>Python Developer</option>
+      </select>
+
+      <button class="btn btn-secondary" type="submit">
+        Recommend Projects
+      </button>
+
+      <a href="/dashboard" class="btn btn-outline-secondary">
+        Back
+      </a>
+
+    </form>
+
+  </div>
+
+  {% if recommendations %}
+  <div class="card shadow-sm p-4 mt-4">
+
+    <h4>Recommended Projects for {{ selected_goal }}</h4>
+
+    <ul class="list-group mt-3">
+      {% for project in recommendations %}
+      <li class="list-group-item">
+        {{ project }}
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

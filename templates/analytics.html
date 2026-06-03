@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2>📈 Placement Analytics Dashboard</h2>
+  <p class="text-muted">Track your resume, interview, and placement readiness progress.</p>
+
+  <div class="row mt-4">
+
+    <div class="col-md-3">
+      <div class="card shadow-sm p-3">
+        <h5>ATS Score</h5>
+        <h1 class="text-primary">{{ latest_ats }}%</h1>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm p-3">
+        <h5>Interviews Taken</h5>
+        <h1 class="text-danger">{{ total_interviews }}</h1>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm p-3">
+        <h5>Average Score</h5>
+        <h1 class="text-success">{{ avg_score }}/10</h1>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm p-3">
+        <h5>Readiness</h5>
+        <h1 class="text-warning">{{ readiness }}%</h1>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card shadow-sm p-4 mt-4">
+    <h4>Placement Readiness Progress</h4>
+
+    <div class="progress" style="height: 30px;">
+      <div class="progress-bar bg-success" style="width: {{ readiness }}%;">
+        {{ readiness }}%
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-4 mt-4">
+    <h4>🏆 Achievements</h4>
+
+    {% if badges %}
+      {% for badge in badges %}
+        <span class="badge bg-dark p-2 m-1">{{ badge }}</span>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">Complete resume analysis and mock interview to unlock badges.</p>
+    {% endif %}
+  </div>
+
+  <div class="card shadow-sm p-4 mt-4">
+    <h4>Recent Interview Scores</h4>
+
+    {% if interviews %}
+      <ul>
+        {% for interview in interviews[-5:] %}
+          <li>
+            {{ interview.role }} - {{ interview.difficulty }} - {{ interview.score }}/10
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No interview attempts yet.</p>
+    {% endif %}
+  </div>
+
+  <a href="/dashboard" class="btn btn-secondary mt-4">
+    Back to Dashboard
+  </a>
+
+</div>
+
+{% endblock %}

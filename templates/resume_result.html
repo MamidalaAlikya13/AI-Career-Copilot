@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2 class="mb-4">Resume Analysis Result</h2>
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 mb-3">
+        <h5>ATS Score</h5>
+        <h1 class="text-primary">{{ score }}%</h1>
+        <p class="text-muted">Based on technical keyword matching</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 mb-3">
+        <h5>Placement Readiness</h5>
+        <h1 class="text-success">{{ readiness_score }}%</h1>
+        <p class="text-muted">Calculated from resume skills</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 mb-3">
+        <h5>Uploaded File</h5>
+        <p><strong>{{ resume.filename }}</strong></p>
+        <p class="text-muted">PDF analyzed successfully</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-3">
+
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3">
+        <h4 class="text-success">Found Skills</h4>
+
+        {% if found %}
+          {% for s in found %}
+            <span class="badge bg-success m-1 p-2">{{ s }}</span>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">No tracked skills found.</p>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3">
+        <h4 class="text-danger">Missing Skills</h4>
+
+        {% if missing %}
+          {% for s in missing %}
+            <span class="badge bg-danger m-1 p-2">{{ s }}</span>
+          {% endfor %}
+        {% else %}
+          <p class="text-success">All tracked skills present.</p>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card shadow-sm p-3 mt-4">
+    <h4>Career Recommendations</h4>
+
+    {% if recommendations %}
+      <ul>
+        {% for r in recommendations %}
+          <li>{{ r }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No recommendations available.</p>
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+    <a class="btn btn-primary" href="/upload_resume">
+      Analyze Another Resume
+    </a>
+
+    <a class="btn btn-success" href="/chat">
+      Ask AI Mentor
+    </a>
+
+    <a class="btn btn-secondary" href="/dashboard">
+      Back to Dashboard
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>🎯 Skill Gap Analyzer</h2>
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label>Target Role</label>
+
+            <select
+                name="role"
+                class="form-control"
+                required>
+
+                <option>AI Engineer</option>
+                <option>Full Stack Developer</option>
+                <option>Data Analyst</option>
+                <option>Python Developer</option>
+
+            </select>
+        </div>
+
+        <div class="mb-3">
+
+            <label>Your Skills / Resume Text</label>
+
+            <textarea
+                name="resume_text"
+                class="form-control"
+                rows="8"
+                placeholder="Paste your resume skills here..."
+                required></textarea>
+
+        </div>
+
+        <button class="btn btn-primary">
+            Analyze
+        </button>
+
+    </form>
+
+    {% if missing_skills %}
+
+    <div class="card mt-4 p-3">
+
+        <h4>Missing Skills</h4>
+
+        <ul>
+
+            {% for skill in missing_skills %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
