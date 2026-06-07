@@ -28,6 +28,14 @@ https://github.com/MamidalaAlikya13/AI-Career-Copilot
 - HTML/CSS/JavaScript
 - Google Gemini API
 
+
+## Team
+### Alikya Mamidala
+Lead Developer – AI Integration, Backend, Database, Core Modules
+
+### Karthikeya Sunkara
+UI/UX, Frontend Improvements, Testing, Validation
+
 ## Installation
 
 ```bash
