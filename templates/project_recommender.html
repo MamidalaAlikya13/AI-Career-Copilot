@@ -4,25 +4,66 @@
 
 <div class="container mt-4">
 
-  <h2>💡 Project Recommender</h2>
-  <p class="text-muted">Get project ideas based on your career goal.</p>
+  <div class="card shadow-lg border-0 p-4">
 
-  <div class="card shadow-sm p-4">
+    <h2>💡 Project Recommender</h2>
+
+    <p class="text-muted">
+      Get unique role-based project ideas by selecting your career goal and difficulty level.
+    </p>
 
     <form method="POST">
 
-      <label class="form-label">Select Your Career Goal</label>
+      <div class="row">
 
-      <select class="form-select mb-3" name="goal" required>
-        <option value="">Choose goal</option>
-        <option>AI Engineer</option>
-        <option>Full Stack Developer</option>
-        <option>Data Analyst</option>
-        <option>Python Developer</option>
-      </select>
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Select Career Goal
+          </label>
+
+          <select class="form-select" name="goal" required>
+
+            <option value="">
+              Choose goal
+            </option>
+
+            {% for role in roles %}
+              <option
+                value="{{ role }}"
+                {% if selected_goal == role %}selected{% endif %}>
+                {{ role }}
+              </option>
+            {% endfor %}
+
+          </select>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Project Level
+          </label>
+
+          <select class="form-select" name="level" required>
+
+            {% for level in levels %}
+              <option
+                value="{{ level }}"
+                {% if selected_level == level %}selected{% endif %}>
+                {{ level }}
+              </option>
+            {% endfor %}
+
+          </select>
+
+        </div>
+
+      </div>
 
       <button class="btn btn-secondary" type="submit">
-        Recommend Projects
+        Generate Unique Projects
       </button>
 
       <a href="/dashboard" class="btn btn-outline-secondary">
@@ -34,19 +75,54 @@
   </div>
 
   {% if recommendations %}
-  <div class="card shadow-sm p-4 mt-4">
 
-    <h4>Recommended Projects for {{ selected_goal }}</h4>
+  <div class="card shadow-lg border-0 p-4 mt-4">
 
-    <ul class="list-group mt-3">
+    <h4>
+      Recommended {{ selected_level }} Projects for {{ selected_goal }}
+    </h4>
+
+    <p class="text-muted">
+      Click generate again to get a different set of project ideas.
+    </p>
+
+    <div class="row mt-3">
+
       {% for project in recommendations %}
-      <li class="list-group-item">
-        {{ project }}
-      </li>
+
+      <div class="col-md-6 mb-3">
+
+        <div class="card h-100 border-0 shadow-sm p-3">
+
+          <h5>
+            {{ loop.index }}. {{ project }}
+          </h5>
+
+          <p class="text-muted">
+            Build this project, upload it to GitHub, add screenshots, and deploy it if possible.
+          </p>
+
+        </div>
+
+      </div>
+
       {% endfor %}
-    </ul>
+
+    </div>
+
+    <form method="POST" class="mt-3">
+
+      <input type="hidden" name="goal" value="{{ selected_goal }}">
+      <input type="hidden" name="level" value="{{ selected_level }}">
+
+      <button class="btn btn-primary" type="submit">
+        Generate Again
+      </button>
+
+    </form>
 
   </div>
+
   {% endif %}
 
 </div>

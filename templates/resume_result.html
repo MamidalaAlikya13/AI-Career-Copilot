@@ -4,40 +4,96 @@
 
 <div class="container mt-4">
 
-  <h2 class="mb-4">Resume Analysis Result</h2>
+  <h2 class="mb-4">📄 AI Resume Expert Analysis</h2>
 
   <div class="row">
 
     <div class="col-md-4">
-      <div class="card shadow-sm p-3 mb-3">
-        <h5>ATS Score</h5>
+      <div class="card shadow-lg border-0 p-3 mb-3">
+        <h5>ATS Simulation Score</h5>
         <h1 class="text-primary">{{ score }}%</h1>
-        <p class="text-muted">Based on technical keyword matching</p>
+        <p class="text-muted">
+          Estimated using keyword and skill matching.
+        </p>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card shadow-sm p-3 mb-3">
+      <div class="card shadow-lg border-0 p-3 mb-3">
         <h5>Placement Readiness</h5>
         <h1 class="text-success">{{ readiness_score }}%</h1>
-        <p class="text-muted">Calculated from resume skills</p>
+        <p class="text-muted">
+          Based on skills, projects, and resume signals.
+        </p>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card shadow-sm p-3 mb-3">
+      <div class="card shadow-lg border-0 p-3 mb-3">
         <h5>Uploaded File</h5>
         <p><strong>{{ resume.filename }}</strong></p>
-        <p class="text-muted">PDF analyzed successfully</p>
+        <p class="text-muted">PDF analyzed successfully.</p>
       </div>
     </div>
 
   </div>
 
-  <div class="row mt-3">
+  <div class="alert alert-info mt-3">
+    <strong>Note:</strong>
+    This is an AI-assisted ATS simulation, not a guaranteed real ATS score.
+    Use it as guidance to improve your resume.
+  </div>
+
+  <div class="card shadow-lg border-0 p-4 mt-4">
+    <h4>🤖 AI Resume Expert Summary</h4>
+
+    <div style="white-space: pre-line; line-height: 1.7;">
+      {{ ai_summary }}
+    </div>
+  </div>
+
+  <div class="row mt-4">
 
     <div class="col-md-6">
-      <div class="card shadow-sm p-3">
+      <div class="card shadow-lg border-0 p-3 h-100">
+        <h4 class="text-success">✅ Resume Strengths</h4>
+
+        {% if strengths %}
+          <ul>
+            {% for item in strengths %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No strong signals detected.</p>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 p-3 h-100">
+        <h4 class="text-danger">⚠️ Weak Areas</h4>
+
+        {% if weaknesses %}
+          <ul>
+            {% for item in weaknesses %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-success">No major weakness detected.</p>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-4">
+
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 p-3">
         <h4 class="text-success">Found Skills</h4>
 
         {% if found %}
@@ -52,7 +108,7 @@
     </div>
 
     <div class="col-md-6">
-      <div class="card shadow-sm p-3">
+      <div class="card shadow-lg border-0 p-3">
         <h4 class="text-danger">Missing Skills</h4>
 
         {% if missing %}
@@ -60,7 +116,7 @@
             <span class="badge bg-danger m-1 p-2">{{ s }}</span>
           {% endfor %}
         {% else %}
-          <p class="text-success">All tracked skills present.</p>
+          <p class="text-success">All tracked skills are present.</p>
         {% endif %}
 
       </div>
@@ -68,8 +124,20 @@
 
   </div>
 
-  <div class="card shadow-sm p-3 mt-4">
-    <h4>Career Recommendations</h4>
+  <div class="card shadow-lg border-0 p-4 mt-4">
+    <h4>🎯 Recommended Roles</h4>
+
+    {% if recommended_roles %}
+      {% for role in recommended_roles %}
+        <span class="badge bg-primary m-1 p-2">{{ role }}</span>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">No role recommendation available.</p>
+    {% endif %}
+  </div>
+
+  <div class="card shadow-lg border-0 p-4 mt-4">
+    <h4>🚀 How to Improve Your ATS Score</h4>
 
     {% if recommendations %}
       <ul>
@@ -82,7 +150,8 @@
     {% endif %}
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4 mb-5">
+
     <a class="btn btn-primary" href="/upload_resume">
       Analyze Another Resume
     </a>
@@ -94,6 +163,7 @@
     <a class="btn btn-secondary" href="/dashboard">
       Back to Dashboard
     </a>
+
   </div>
 
 </div>

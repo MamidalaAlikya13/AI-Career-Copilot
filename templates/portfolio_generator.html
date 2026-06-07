@@ -2,35 +2,136 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<style>
+  .portfolio-form-hero {
+    background: linear-gradient(135deg, #2563eb, #7c3aed, #06b6d4);
+    color: white;
+    padding: 45px 30px;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+  }
 
-  <h2>🌐 Portfolio Generator</h2>
-  <p class="text-muted">Generate a professional portfolio webpage instantly.</p>
+  .portfolio-form-hero::before {
+    content: "";
+    position: absolute;
+    height: 180px;
+    width: 180px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    top: -60px;
+    right: -50px;
+    animation: float 5s ease-in-out infinite;
+  }
 
-  <form method="POST" class="card shadow-sm p-4">
+  .portfolio-form-hero::after {
+    content: "";
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    bottom: -40px;
+    left: -30px;
+    animation: float 7s ease-in-out infinite;
+  }
 
-    <input class="form-control mb-3" name="name" placeholder="Your Name" required>
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0); }
+  }
 
-    <input class="form-control mb-3" name="title" placeholder="Example: Aspiring AI Engineer | Full Stack Developer" required>
+  .form-card {
+    border: none;
+    border-radius: 22px;
+    animation: fadeUp 0.7s ease both;
+  }
 
-    <textarea class="form-control mb-3" name="about" rows="4" placeholder="Write about yourself" required></textarea>
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-    <textarea class="form-control mb-3" name="skills" rows="3" placeholder="Skills: Python, Flask, SQL, HTML, CSS, JavaScript" required></textarea>
+  .form-control {
+    border-radius: 12px;
+    padding: 12px;
+  }
 
-    <textarea class="form-control mb-3" name="projects" rows="4" placeholder="Projects: AI Career Copilot, Resume Analyzer..." required></textarea>
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(37,99,235,0.2);
+  }
+</style>
 
-    <textarea class="form-control mb-3" name="education" rows="3" placeholder="Education details" required></textarea>
+<div class="container mt-4 mb-5">
 
-    <textarea class="form-control mb-3" name="certificates" rows="3" placeholder="Certificates: Python, AI/ML Workshop, IEEE Presentation"></textarea>
+  <div class="portfolio-form-hero shadow-lg mb-4">
+    <div style="position: relative; z-index: 2;">
+      <h1 class="fw-bold">🌐 Portfolio Generator Pro</h1>
+      <p class="lead mb-0">
+        Create an animated, professional portfolio preview with your skills, projects, education, and links.
+      </p>
+    </div>
+  </div>
 
-    <input class="form-control mb-3" name="email" placeholder="Email" required>
+  <form method="POST" class="card shadow-lg p-4 form-card">
 
-    <input class="form-control mb-3" name="github" placeholder="GitHub Profile Link">
+    <div class="row">
 
-    <input class="form-control mb-3" name="linkedin" placeholder="LinkedIn Profile Link">
+      <div class="col-md-6">
+        <label class="form-label">Your Name</label>
+        <input class="form-control mb-3" name="name" placeholder="Your Name" required>
+      </div>
 
-    <button class="btn btn-primary" type="submit">
-      Generate Portfolio
+      <div class="col-md-6">
+        <label class="form-label">Professional Title</label>
+        <input class="form-control mb-3" name="title" placeholder="Aspiring AI Engineer | Full Stack Developer" required>
+      </div>
+
+    </div>
+
+    <label class="form-label">About Yourself</label>
+    <textarea class="form-control mb-3" name="about" rows="4" placeholder="Write about yourself..." required></textarea>
+
+    <label class="form-label">Skills</label>
+    <textarea class="form-control mb-3" name="skills" rows="3" placeholder="Python, Flask, SQL, HTML, CSS, JavaScript" required></textarea>
+
+    <label class="form-label">Projects</label>
+    <textarea class="form-control mb-3" name="projects" rows="4" placeholder="AI Career Copilot, Resume Analyzer, Portfolio Website..." required></textarea>
+
+    <label class="form-label">Education</label>
+    <textarea class="form-control mb-3" name="education" rows="3" placeholder="B.Tech CSE, Pragati Engineering College..." required></textarea>
+
+    <label class="form-label">Certificates / Achievements</label>
+    <textarea class="form-control mb-3" name="certificates" rows="3" placeholder="NPTEL Java, AWS Cloud Foundations, IEEE Paper..."></textarea>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <label class="form-label">Email</label>
+        <input class="form-control mb-3" name="email" placeholder="yourmail@gmail.com" required>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">GitHub</label>
+        <input class="form-control mb-3" name="github" placeholder="https://github.com/username">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">LinkedIn</label>
+        <input class="form-control mb-3" name="linkedin" placeholder="https://linkedin.com/in/username">
+      </div>
+
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit">
+      Generate Animated Portfolio
     </button>
 
     <a href="/dashboard" class="btn btn-secondary mt-2">

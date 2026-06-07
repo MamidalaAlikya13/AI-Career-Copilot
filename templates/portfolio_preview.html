@@ -2,104 +2,323 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<style>
+  .portfolio-page {
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+    border-radius: 25px;
+    padding: 30px;
+  }
 
-  <div class="card shadow p-5">
+  .portfolio-hero {
+    background: linear-gradient(135deg, #2563eb, #7c3aed, #06b6d4);
+    color: white;
+    border-radius: 28px;
+    padding: 70px 30px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
 
-    <div class="text-center mb-4">
-      <h1>{{ data.name }}</h1>
+  .portfolio-hero::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    top: -70px;
+    right: -50px;
+    animation: float 6s ease-in-out infinite;
+  }
 
-      <h4 class="text-primary">
-        {{ data.title }}
-      </h4>
+  .portfolio-hero::after {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    bottom: -50px;
+    left: -40px;
+    animation: float 7s ease-in-out infinite;
+  }
 
-      <p class="text-muted">
-        AI Engineer • Full Stack Developer • Research Enthusiast
-      </p>
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-card {
+    border: none;
+    border-radius: 22px;
+    padding: 30px;
+    margin-top: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .project-card {
+    border: none;
+    border-radius: 18px;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  }
+
+  .skill-badge {
+    background: #4f46e5;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 25px;
+    margin: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .skill-badge:hover {
+    background: #7c3aed;
+    transform: scale(1.08);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-link {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: white !important;
+    }
+
+    .portfolio-page {
+      background: white !important;
+      padding: 0;
+    }
+
+    .section-card {
+      box-shadow: none;
+      border: 1px solid #ddd;
+    }
+  }
+</style>
+
+<div class="container mt-4 mb-5">
+
+  <div class="portfolio-page">
+
+    <div class="portfolio-hero shadow-lg">
+
+      <div class="hero-content">
+
+        <h1 class="display-4 fw-bold">
+          {{ data.name }}
+        </h1>
+
+        <h3 class="mt-3">
+          {{ data.title }}
+        </h3>
+
+        <p class="lead mt-3">
+          Professional Portfolio
+        </p>
+
+        <div class="mt-4 no-print">
+
+          {% if data.github %}
+            <a href="{{ data.github }}" target="_blank" class="btn btn-light me-2">
+              GitHub
+            </a>
+          {% endif %}
+
+          {% if data.linkedin %}
+            <a href="{{ data.linkedin }}" target="_blank" class="btn btn-outline-light me-2">
+              LinkedIn
+            </a>
+          {% endif %}
+
+          <a href="mailto:{{ data.email }}" class="btn btn-warning">
+            Contact Me
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <hr>
+    <div class="card section-card">
+      <h3>👋 About Me</h3>
+      <p class="lead">{{ data.about }}</p>
+    </div>
 
-    <h3>About Me</h3>
-    <p>{{ data.about }}</p>
+    <div class="card section-card">
+      <h3>🛠 Skills</h3>
 
-    <h3 class="mt-4">Skills</h3>
+      <div class="mt-3">
+        {% for skill in data.skills %}
+          <span class="skill-badge">
+            {{ skill }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
 
-    <div class="mt-3">
-      {% for skill in data.skills %}
-        <span class="badge bg-primary p-3 m-1 fs-6">
-          {{ skill }}
-        </span>
+    <div class="card section-card">
+
+      <h3>🚀 Projects</h3>
+
+      {% if data.projects %}
+
+        <div class="row mt-3">
+
+          {% for project in data.projects.split(',') %}
+
+            {% if project.strip() %}
+
+              <div class="col-md-4 mb-3">
+                <div class="card project-card p-3 shadow-sm">
+                  <h5>💻 {{ project.strip() }}</h5>
+                  <p>
+                    This project highlights practical skills, problem-solving ability,
+                    and real-world implementation experience.
+                  </p>
+                </div>
+              </div>
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+
+        <p class="text-muted">No projects added.</p>
+
+      {% endif %}
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="card section-card h-100">
+          <h3>🎓 Education</h3>
+          <p>{{ data.education }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card section-card h-100">
+
+  <h3>🏆 Certificates & Achievements</h3>
+
+  {% if data.certificates %}
+
+    <ul>
+
+      {% for cert in data.certificates.split('\n') %}
+
+        {% if '|' in cert %}
+
+          {% set parts = cert.split('|') %}
+
+          <li>
+            <strong>{{ parts[0].strip() }}</strong>
+
+            <a
+              href="{{ parts[1].strip() }}"
+              target="_blank"
+              class="btn btn-sm btn-primary ms-2">
+
+              View Certificate
+
+            </a>
+          </li>
+
+        {% endif %}
+
       {% endfor %}
+
+    </ul>
+
+  {% else %}
+
+    <p class="text-muted">
+      No certificates added.
+    </p>
+
+  {% endif %}
+
+  </div>
+      </div>
+
     </div>
 
-    <h3 class="mt-4">Projects</h3>
+    <div class="card section-card">
 
-    <div class="card shadow-sm p-3 mb-3">
-      <h5>🤖 AI Career Copilot</h5>
+      <h3>📞 Contact</h3>
+
       <p>
-        Full-stack career guidance platform with resume analysis,
-        ATS scoring, AI mentor chat, mock interviews,
-        analytics dashboard, and portfolio generation.
-      </p>
-    </div>
-
-    <div class="card shadow-sm p-3 mb-3">
-      <h5>🚦 AI Traffic Management System</h5>
-      <p>
-        AI-powered traffic prediction and congestion reduction system
-        designed to improve urban transportation efficiency.
-      </p>
-    </div>
-
-    <div class="card shadow-sm p-3 mb-3">
-      <h5>📄 Resume Analyzer</h5>
-      <p>
-        Resume analysis system using Flask, PDF parsing,
-        skill extraction, ATS scoring, and career recommendations.
-      </p>
-    </div>
-
-    <h3 class="mt-4">Education</h3>
-    <p>{{ data.education }}</p>
-
-    <h3 class="mt-4">Certificates</h3>
-
-    {% if data.certificates %}
-      <p>{{ data.certificates }}</p>
-    {% else %}
-      <ul>
-        <li>Python Programming Certification</li>
-        <li>AI & Machine Learning Workshop</li>
-        <li>Web Development Training</li>
-        <li>IEEE Conference Paper Presentation</li>
-      </ul>
-    {% endif %}
-
-    <h3 class="mt-4">Contact</h3>
-    <p>Email: {{ data.email }}</p>
-
-    {% if data.github %}
-      <p>
-        GitHub:
-        <a href="{{ data.github }}" target="_blank">
-          {{ data.github }}
+        <strong>Email:</strong>
+        <a href="mailto:{{ data.email }}" class="contact-link">
+          {{ data.email }}
         </a>
       </p>
-    {% endif %}
 
-    {% if data.linkedin %}
-      <p>
-        LinkedIn:
-        <a href="{{ data.linkedin }}" target="_blank">
-          {{ data.linkedin }}
-        </a>
-      </p>
-    {% endif %}
+      {% if data.github %}
+        <p>
+          <strong>GitHub:</strong>
+          <a href="{{ data.github }}" target="_blank" class="contact-link">
+            {{ data.github }}
+          </a>
+        </p>
+      {% endif %}
+
+      {% if data.linkedin %}
+        <p>
+          <strong>LinkedIn:</strong>
+          <a href="{{ data.linkedin }}" target="_blank" class="contact-link">
+            {{ data.linkedin }}
+          </a>
+        </p>
+      {% endif %}
+
+    </div>
 
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4 no-print">
+
+    <button onclick="window.print()" class="btn btn-success">
+      Download / Save as PDF
+    </button>
+
     <a href="/portfolio-generator" class="btn btn-primary">
       Edit Portfolio
     </a>
@@ -107,6 +326,7 @@
     <a href="/dashboard" class="btn btn-secondary">
       Back to Dashboard
     </a>
+
   </div>
 
 </div>

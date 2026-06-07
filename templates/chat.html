@@ -1,34 +1,89 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Mentor Chat</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>AI Career Mentor</h1>
+{% block content %}
 
-<form method="POST">
+<div class="container mt-4">
 
-    <textarea
-        name="message"
-        rows="6"
-        cols="60"
-        placeholder="Ask career questions..."
-    ></textarea>
+  <div class="card shadow-lg border-0 p-4">
 
-    <br><br>
+    <h2 class="mb-2">🤖 AI Career Mentor</h2>
+    <p class="text-muted">
+      Get role-specific, expert-level career guidance powered by AI.
+    </p>
 
-    <button type="submit">
-        Ask AI
-    </button>
+    <form method="POST">
 
-</form>
+      <div class="mb-3">
+        <label class="form-label">Select Expert Type</label>
 
-<hr>
+        <select name="expert_type" class="form-select" required>
+          <option value="Career Mentor">Career Mentor</option>
+          <option value="Resume Expert">Resume Expert</option>
+          <option value="Interview Coach">Interview Coach</option>
+          <option value="Roadmap Planner">Roadmap Planner</option>
+          <option value="Skill Gap Analyst">Skill Gap Analyst</option>
+          <option value="Project Mentor">Project Mentor</option>
+        </select>
+      </div>
 
-<h3>Response:</h3>
+      <div class="mb-3">
+        <label class="form-label">Target Role</label>
 
-<p>{{ response }}</p>
+        <select name="target_role" class="form-select" required>
+          <option value="AI Engineer">AI Engineer</option>
+          <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="Data Analyst">Data Analyst</option>
+          <option value="Python Developer">Python Developer</option>
+          <option value="Java Developer">Java Developer</option>
+          <option value="Full Stack Developer">Full Stack Developer</option>
+          <option value="Frontend Developer">Frontend Developer</option>
+          <option value="Backend Developer">Backend Developer</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Cloud Engineer">Cloud Engineer</option>
+          <option value="DevOps Engineer">DevOps Engineer</option>
+          <option value="Cyber Security Analyst">Cyber Security Analyst</option>
+          <option value="UI/UX Designer">UI/UX Designer</option>
+          <option value="Mobile App Developer">Mobile App Developer</option>
+          <option value="QA/Test Engineer">QA/Test Engineer</option>
+        </select>
+      </div>
 
-</body>
-</html>
+      <div class="mb-3">
+        <label class="form-label">Your Question</label>
+
+        <textarea
+          name="message"
+          class="form-control"
+          rows="6"
+          placeholder="Example: Create a 3-month roadmap for becoming an AI Engineer..."
+          required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Ask Expert AI
+      </button>
+
+      <a href="/dashboard" class="btn btn-secondary">
+        Back to Dashboard
+      </a>
+
+    </form>
+
+  </div>
+
+  {% if response %}
+  <div class="card shadow-lg border-0 p-4 mt-4">
+
+    <h4>✅ Expert AI Response</h4>
+
+    <div style="white-space: pre-line; line-height: 1.7;">
+      {{ response }}
+    </div>
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

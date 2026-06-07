@@ -4,58 +4,170 @@
 
 <div class="container mt-4">
 
-    <h2>🎯 Skill Gap Analyzer</h2>
+    <div class="card shadow-lg border-0 p-4">
 
-    <form method="POST">
+        <h2>🎯 Skill Gap Analyzer</h2>
 
-        <div class="mb-3">
-            <label>Target Role</label>
+        <p class="text-muted">
+            Compare your current skills with industry requirements for your target role.
+        </p>
 
-            <select
-                name="role"
-                class="form-control"
-                required>
+        <form method="POST">
 
-                <option>AI Engineer</option>
-                <option>Full Stack Developer</option>
-                <option>Data Analyst</option>
-                <option>Python Developer</option>
+            <div class="mb-3">
 
-            </select>
+                <label class="form-label">
+                    Target Role
+                </label>
+
+                <select
+                    name="role"
+                    class="form-select"
+                    required>
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    {% for r in roles %}
+                        <option
+                            value="{{ r }}"
+                            {% if role == r %}selected{% endif %}>
+                            {{ r }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Your Skills / Resume Text
+                </label>
+
+                <textarea
+                    name="resume_text"
+                    class="form-control"
+                    rows="8"
+                    placeholder="Paste your resume, skills, certifications, technologies, and project details here..."
+                    required></textarea>
+
+            </div>
+
+            <button class="btn btn-primary">
+                Analyze Skill Gap
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if readiness_score is not none %}
+
+    <div class="card shadow-lg border-0 p-4 mt-4">
+
+        <h3>📊 Skill Readiness Score</h3>
+
+        <h1 class="text-primary">
+            {{ readiness_score }}%
+        </h1>
+
+        {% if readiness_score >= 80 %}
+            <div class="alert alert-success">
+                Excellent match for {{ role }}.
+            </div>
+
+        {% elif readiness_score >= 60 %}
+            <div class="alert alert-warning">
+                Good progress. Learn missing skills to become job-ready.
+            </div>
+
+        {% else %}
+            <div class="alert alert-danger">
+                Significant skill gaps detected. Focus on fundamentals first.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 p-4 h-100">
+
+                <h4 class="text-success">
+                    ✅ Matched Skills
+                </h4>
+
+                {% if matched_skills %}
+
+                    {% for skill in matched_skills %}
+                        <span class="badge bg-success m-1 p-2">
+                            {{ skill }}
+                        </span>
+                    {% endfor %}
+
+                {% else %}
+
+                    <p class="text-muted">
+                        No matching skills found.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
         </div>
 
-        <div class="mb-3">
+        <div class="col-md-6">
 
-            <label>Your Skills / Resume Text</label>
+            <div class="card shadow-lg border-0 p-4 h-100">
 
-            <textarea
-                name="resume_text"
-                class="form-control"
-                rows="8"
-                placeholder="Paste your resume skills here..."
-                required></textarea>
+                <h4 class="text-danger">
+                    ❌ Missing Skills
+                </h4>
+
+                {% if missing_skills %}
+
+                    {% for skill in missing_skills %}
+                        <span class="badge bg-danger m-1 p-2">
+                            {{ skill }}
+                        </span>
+                    {% endfor %}
+
+                {% else %}
+
+                    <p class="text-success">
+                        No major missing skills detected.
+                    </p>
+
+                {% endif %}
+
+            </div>
 
         </div>
 
-        <button class="btn btn-primary">
-            Analyze
-        </button>
+    </div>
 
-    </form>
+    <div class="card shadow-lg border-0 p-4 mt-4">
 
-    {% if missing_skills %}
+        <h4>🚀 Improvement Recommendations</h4>
 
-    <div class="card mt-4 p-3">
+        {% if recommendations %}
 
-        <h4>Missing Skills</h4>
+            <ul>
 
-        <ul>
+                {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                {% endfor %}
 
-            {% for skill in missing_skills %}
-            <li>{{ skill }}</li>
-            {% endfor %}
+            </ul>
 
-        </ul>
+        {% endif %}
 
     </div>
 

@@ -4,10 +4,14 @@
 
 <div class="container mt-4">
 
-  <h2>🎤 Mock Interview</h2>
-  <p class="text-muted">Practice interview questions and get instant scoring.</p>
+  <div class="card shadow-lg border-0 p-4 mb-4">
 
-  <div class="card shadow-sm p-4 mb-4">
+    <h2>🎤 Mock Interview</h2>
+
+    <p class="text-muted">
+      Practice role-specific interview questions with difficulty-based scoring.
+    </p>
+
     <form method="POST">
 
       <input type="hidden" name="action" value="generate">
@@ -15,24 +19,75 @@
       <div class="row">
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">Select Role</label>
+
+          <label class="form-label">
+            Select Role
+          </label>
+
           <select class="form-select" name="role" required>
-            <option value="">Choose role</option>
-            <option>Full Stack Developer</option>
-            <option>Python Developer</option>
-            <option>AI Engineer</option>
-            <option>Data Analyst</option>
+
+            <option value="">
+              Choose role
+            </option>
+
+            <option>
+              Frontend Developer
+            </option>
+
+            <option>
+              Backend Developer
+            </option>
+
+            <option>
+              Full Stack Developer
+            </option>
+
+            <option>
+              Python Developer
+            </option>
+
+            <option>
+              AI Engineer
+            </option>
+
+            <option>
+              Data Analyst
+            </option>
+
+            <option>
+              Software Engineer
+            </option>
+
           </select>
+
         </div>
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">Select Difficulty</label>
+
+          <label class="form-label">
+            Select Difficulty
+          </label>
+
           <select class="form-select" name="difficulty" required>
-            <option value="">Choose difficulty</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
+
+            <option value="">
+              Choose difficulty
+            </option>
+
+            <option>
+              Easy
+            </option>
+
+            <option>
+              Medium
+            </option>
+
+            <option>
+              Hard
+            </option>
+
           </select>
+
         </div>
 
       </div>
@@ -46,12 +101,16 @@
       </a>
 
     </form>
+
   </div>
 
   {% if questions and score is none %}
-  <div class="card shadow-sm p-4">
 
-    <h4>Questions</h4>
+  <div class="card shadow-lg border-0 p-4">
+
+    <h4>
+      Questions for {{ role }} - {{ difficulty }} Level
+    </h4>
 
     <form method="POST">
 
@@ -60,7 +119,9 @@
       <input type="hidden" name="difficulty" value="{{ difficulty }}">
 
       {% for q in questions %}
+
         <div class="mb-4">
+
           <label class="form-label">
             <strong>{{ loop.index }}. {{ q }}</strong>
           </label>
@@ -73,7 +134,9 @@
             rows="4"
             placeholder="Type your answer here..."
             required></textarea>
+
         </div>
+
       {% endfor %}
 
       <button class="btn btn-success" type="submit">
@@ -83,23 +146,42 @@
     </form>
 
   </div>
+
   {% endif %}
 
   {% if score is not none %}
-  <div class="card shadow-sm p-4 mt-4">
+
+  <div class="card shadow-lg border-0 p-4 mt-4">
 
     <h3>Interview Result</h3>
+
+    <p class="text-muted">
+      Role: <strong>{{ role }}</strong> |
+      Difficulty: <strong>{{ difficulty }}</strong>
+    </p>
 
     <h1 class="text-primary">
       Score: {{ score }}/10
     </h1>
 
     {% if score >= 8 %}
-      <p class="text-success">Excellent performance! You are interview-ready.</p>
+
+      <div class="alert alert-success">
+        Excellent performance! You are interview-ready.
+      </div>
+
     {% elif score >= 5 %}
-      <p class="text-warning">Good attempt. Improve explanation and examples.</p>
+
+      <div class="alert alert-warning">
+        Good attempt. Improve explanation, examples, and technical depth.
+      </div>
+
     {% else %}
-      <p class="text-danger">Needs improvement. Practice basic concepts clearly.</p>
+
+      <div class="alert alert-danger">
+        Needs improvement. Practice concepts clearly with examples.
+      </div>
+
     {% endif %}
 
     <hr>
@@ -107,12 +189,31 @@
     <h4>Detailed Feedback</h4>
 
     {% for item in feedback %}
+
       <div class="border rounded p-3 mb-3">
-        <p><strong>Question:</strong> {{ item.question }}</p>
-        <p><strong>Your Answer:</strong> {{ item.answer }}</p>
-        <p><strong>Marks:</strong> {{ item.marks }}/2</p>
-        <p><strong>Feedback:</strong> {{ item.message }}</p>
+
+        <p>
+          <strong>Question:</strong>
+          {{ item.question }}
+        </p>
+
+        <p>
+          <strong>Your Answer:</strong>
+          {{ item.answer }}
+        </p>
+
+        <p>
+          <strong>Marks:</strong>
+          {{ item.marks }}/2
+        </p>
+
+        <p>
+          <strong>Feedback:</strong>
+          {{ item.message }}
+        </p>
+
       </div>
+
     {% endfor %}
 
     <a class="btn btn-danger" href="/mock-interview">
@@ -124,6 +225,7 @@
     </a>
 
   </div>
+
   {% endif %}
 
 </div>

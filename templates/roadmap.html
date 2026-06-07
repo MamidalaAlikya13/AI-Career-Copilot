@@ -1,98 +1,243 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-lg-8">
-    <div class="card mb-4">
-      <div class="card-body">
-        <h2 class="card-title">Career Roadmap Generator</h2>
-        <p class="text-muted">Enter your career goal and current skills to generate a practical 30-day plan.</p>
-        <form method="post">
-          <div class="mb-3">
-            <label class="form-label">Career Goal</label>
-            <input name="career_goal" class="form-control" placeholder="e.g. Frontend Developer, Data Scientist" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Current Skills</label>
-            <textarea name="current_skills" class="form-control" rows="3" placeholder="Enter comma-separated skills, e.g. Python, SQL, HTML"></textarea>
-          </div>
-          <button class="btn btn-primary">Generate Roadmap</button>
-        </form>
-      </div>
-    </div>
 
-    {% if roadmap %}
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">Roadmap for {{ roadmap.goal }}</h3>
-        <p><strong>Current Skills:</strong> {{ roadmap.current_skills | join(', ') if roadmap.current_skills else 'None provided' }}</p>
+<div class="container mt-4">
 
-        <h4>30 Day Plan</h4>
-        <div class="list-group mb-3">
-          {% for step in roadmap.thirty_day_plan %}
-          <div class="list-group-item">
-            <h5>{{ step.week }}</h5>
-            <p>{{ step.focus }}</p>
-            <ul>
-              {% for action in step.actions %}
-              <li>{{ action }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endfor %}
+  <div class="card shadow-lg border-0 p-4 mb-4">
+
+    <h2>🚀 Career Roadmap Generator</h2>
+
+    <p class="text-muted">
+      Select your target role and duration to generate a practical learning roadmap.
+    </p>
+
+    <form method="post">
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Target Role
+          </label>
+
+          <select
+            name="career_goal"
+            class="form-select"
+            required>
+
+            <option value="">
+              Select Role
+            </option>
+
+            {% for r in roles %}
+              <option
+                value="{{ r }}"
+                {% if selected_role == r %}selected{% endif %}>
+                {{ r }}
+              </option>
+            {% endfor %}
+
+          </select>
+
         </div>
 
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <div class="card h-100 border-info">
-              <div class="card-body">
-                <h5 class="card-title">Missing Skills</h5>
-                {% if roadmap.missing_skills %}
-                <ul>
-                  {% for skill in roadmap.missing_skills %}
-                  <li>{{ skill }}</li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p class="text-success">No missing skills detected. Great job!</p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <div class="card h-100 border-success">
-              <div class="card-body">
-                <h5 class="card-title">Found Skills</h5>
-                {% if roadmap.found_skills %}
-                <ul>
-                  {% for skill in roadmap.found_skills %}
-                  <li>{{ skill }}</li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p class="text-muted">No matched skills from the common roadmap keywords.</p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Roadmap Duration
+          </label>
+
+          <select
+            name="duration"
+            class="form-select"
+            required>
+
+            {% for d in durations %}
+              <option
+                value="{{ d }}"
+                {% if selected_duration == d %}selected{% endif %}>
+                {{ d }}
+              </option>
+            {% endfor %}
+
+          </select>
+
         </div>
 
-        <h4>Recommended Projects</h4>
-        <ul>
-          {% for project in roadmap.recommended_projects %}
-          <li>{{ project }}</li>
-          {% endfor %}
-        </ul>
-
-        <h4>Interview Preparation Tips</h4>
-        <ul>
-          {% for tip in roadmap.interview_tips %}
-          <li>{{ tip }}</li>
-          {% endfor %}
-        </ul>
       </div>
-    </div>
-    {% endif %}
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Current Skills
+        </label>
+
+        <textarea
+          name="current_skills"
+          class="form-control"
+          rows="3"
+          placeholder="Enter comma-separated skills, e.g. Python, SQL, HTML"></textarea>
+
+      </div>
+
+      <button class="btn btn-primary">
+        Generate Roadmap
+      </button>
+
+      <a href="/dashboard" class="btn btn-secondary">
+        Back
+      </a>
+
+    </form>
+
   </div>
+
+  {% if roadmap %}
+
+  <div class="card shadow-lg border-0 p-4">
+
+    <h3>
+      Roadmap for {{ roadmap.goal }}
+    </h3>
+
+    <p class="text-muted">
+      Duration: <strong>{{ roadmap.duration }}</strong>
+    </p>
+
+    <p>
+      <strong>Current Skills:</strong>
+      {{ roadmap.current_skills | join(', ') if roadmap.current_skills else 'None provided' }}
+    </p>
+
+    <hr>
+
+    <h4>📅 Learning Plan</h4>
+
+    <div class="list-group mb-4">
+
+      {% for step in roadmap.plan %}
+
+      <div class="list-group-item mb-2 rounded">
+
+        <h5>
+          {{ step.period }}
+        </h5>
+
+        <p>
+          <strong>Focus:</strong>
+          {{ step.focus }}
+        </p>
+
+        <ul>
+          {% for action in step.actions %}
+            <li>{{ action }}</li>
+          {% endfor %}
+        </ul>
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6 mb-3">
+
+        <div class="card h-100 border-danger">
+
+          <div class="card-body">
+
+            <h5 class="card-title text-danger">
+              Missing Skills
+            </h5>
+
+            {% if roadmap.missing_skills %}
+
+              {% for skill in roadmap.missing_skills %}
+                <span class="badge bg-danger m-1 p-2">
+                  {{ skill }}
+                </span>
+              {% endfor %}
+
+            {% else %}
+
+              <p class="text-success">
+                No missing skills detected. Great job!
+              </p>
+
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-3">
+
+        <div class="card h-100 border-success">
+
+          <div class="card-body">
+
+            <h5 class="card-title text-success">
+              Found Skills
+            </h5>
+
+            {% if roadmap.found_skills %}
+
+              {% for skill in roadmap.found_skills %}
+                <span class="badge bg-success m-1 p-2">
+                  {{ skill }}
+                </span>
+              {% endfor %}
+
+            {% else %}
+
+              <p class="text-muted">
+                No matched skills found from your input.
+              </p>
+
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 p-3 mt-4">
+
+      <h4>💡 Recommended Projects</h4>
+
+      <ul>
+        {% for project in roadmap.recommended_projects %}
+          <li>{{ project }}</li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+    <div class="card shadow-sm border-0 p-3 mt-4">
+
+      <h4>🎤 Interview Preparation Tips</h4>
+
+      <ul>
+        {% for tip in roadmap.interview_tips %}
+          <li>{{ tip }}</li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+  </div>
+
+  {% endif %}
+
 </div>
+
 {% endblock %}

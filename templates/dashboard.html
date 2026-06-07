@@ -1,105 +1,319 @@
-{% extends 'base.html' %}
+={% extends 'base.html' %}
 
 {% block content %}
 
-<div class="row">
+<div class="premium-hero mb-4">
 
-  <div class="col-md-10">
+  <div class="row align-items-center">
 
-    <h2 class="mb-3">
-      Welcome, {{ user.username }}! 👋
-    </h2>
+    <div class="col-lg-8">
 
-    <p class="lead">
-      Email: {{ user.email }}
-    </p>
+      <p class="text-muted mb-2">
+        AI-powered placement preparation workspace
+      </p>
 
-    <p>
-      This is your AI Career Copilot Dashboard.
-      Analyze resumes, chat with AI mentors, and generate career roadmaps.
-    </p>
+      <h1 class="section-title display-6 mb-3">
+        Welcome back, {{ user.username }} 👋
+      </h1>
 
-    <hr>
-
-    <div class="mt-4">
-
-      <div class="mt-4 d-flex flex-wrap gap-3">
-
-  <a class="btn btn-primary btn-lg" href="/upload_resume">
-      📄 Upload Resume
-  </a>
-
-  <a class="btn btn-success btn-lg" href="/chat">
-      🤖 AI Mentor Chat
-  </a>
-
-  <a class="btn btn-warning btn-lg text-dark" href="/roadmap">
-      🚀 Career Roadmap
-  </a>
-
-  <a class="btn btn-danger btn-lg" href="/mock-interview">
-      🎤 Mock Interview
-  </a>
-
-  <a class="btn btn-dark btn-lg" href="/interview-history">
-      📊 Interview History
-  </a>
-
-  <a class="btn btn-info btn-lg text-white" href="/analytics">
-      📈 Analytics
-  </a>
-
-  <a class="btn btn-secondary btn-lg" href="/project-recommender">
-      💡 Project Recommender
-  </a>
-
-  <a class="btn btn-outline-primary btn-lg" href="/portfolio-generator">
-      🌐 Portfolio Generator
-  </a>
-
-  <a class="btn btn-info btn-lg text-white" href="/skill-gap">
-      🎯 Skill Gap Analyzer
-  </a>
-
-  <a class="btn btn-dark btn-lg" href="/about">
-      ℹ️ About Project
-  </a>
-
-</div>
+      <p class="lead text-muted mb-0">
+        Analyze resumes, discover skill gaps, generate roadmaps,
+        practice interviews, and build portfolio-ready projects.
+      </p>
 
     </div>
 
-    <div class="row mt-5">
+    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
 
-      <div class="col-md-4">
-        <div class="card shadow-sm p-3">
-          <h4>📄 Resume Analyzer</h4>
-          <p>
-            Upload your resume and get ATS score,
-            skill analysis, and recommendations.
-          </p>
-        </div>
+      <a href="/upload_resume" class="btn btn-primary btn-lg">
+        <i class="bi bi-lightning-charge"></i>
+        Start Resume Analysis
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row mb-4">
+
+  <div class="col-md-3 mb-3">
+    <div class="stat-pill">
+      <p class="text-muted mb-1">
+        <i class="bi bi-robot"></i> AI Modules
+      </p>
+      <h3 class="mb-0">6+</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="stat-pill">
+      <p class="text-muted mb-1">
+        <i class="bi bi-person-workspace"></i> Career Roles
+      </p>
+      <h3 class="mb-0">15+</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="stat-pill">
+      <p class="text-muted mb-1">
+        <i class="bi bi-lightbulb"></i> Project Ideas
+      </p>
+      <h3 class="mb-0">100+</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="stat-pill">
+      <p class="text-muted mb-1">
+        <i class="bi bi-cloud-check"></i> Deployment
+      </p>
+      <h3 class="mb-0 text-success">Live</h3>
+    </div>
+  </div>
+
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+  <div>
+    <h3 class="section-title mb-1">
+      Career Tools
+    </h3>
+
+    <p class="text-muted mb-0">
+      Choose a module to continue your preparation.
+    </p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(59,130,246,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-file-earmark-text"></i>
       </div>
 
-      <div class="col-md-4">
-        <div class="card shadow-sm p-3">
-          <h4>🤖 AI Mentor</h4>
-          <p>
-            Ask career questions and receive
-            AI-powered guidance and roadmaps.
-          </p>
-        </div>
+      <h5 class="fw-bold">Resume Analyzer</h5>
+
+      <p class="text-muted">
+        AI resume score, strengths, missing skills, ATS-style analysis and improvement tips.
+      </p>
+
+      <a href="/upload_resume" class="btn btn-outline-primary mt-auto">
+        📄 Analyze Resume
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(139,92,246,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-robot"></i>
       </div>
 
-      <div class="col-md-4">
-        <div class="card shadow-sm p-3">
-          <h4>🚀 Career Roadmap</h4>
-          <p>
-            Generate personalized learning plans
-            based on your dream role.
-          </p>
-        </div>
+      <h5 class="fw-bold">AI Mentor Chat</h5>
+
+      <p class="text-muted">
+        Ask role-specific questions and get expert-level career guidance.
+      </p>
+
+      <a href="/chat" class="btn btn-outline-primary mt-auto">
+        🤖 Start AI Chat
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(34,197,94,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-map"></i>
       </div>
+
+      <h5 class="fw-bold">Career Roadmap</h5>
+
+      <p class="text-muted">
+        Generate 30-day, 3-month, 6-month, or 12-month role-based roadmaps.
+      </p>
+
+      <a href="/roadmap" class="btn btn-outline-primary mt-auto">
+        🚀 Generate Roadmap
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(249,115,22,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-mic"></i>
+      </div>
+
+      <h5 class="fw-bold">Mock Interview</h5>
+
+      <p class="text-muted">
+        Practice role-based interview questions with scoring and feedback.
+      </p>
+
+      <a href="/mock-interview" class="btn btn-outline-primary mt-auto">
+        🎤 Start Interview
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(236,72,153,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-bullseye"></i>
+      </div>
+
+      <h5 class="fw-bold">Skill Gap Analyzer</h5>
+
+      <p class="text-muted">
+        Compare your current skills with target role requirements.
+      </p>
+
+      <a href="/skill-gap" class="btn btn-outline-primary mt-auto">
+        🎯 Analyze Skills
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(6,182,212,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-lightbulb"></i>
+      </div>
+
+      <h5 class="fw-bold">Project Recommender</h5>
+
+      <p class="text-muted">
+        Get unique beginner, intermediate, advanced, or mixed project ideas.
+      </p>
+
+      <a href="/project-recommender" class="btn btn-outline-primary mt-auto">
+        💡 Get Projects
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(16,185,129,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-globe"></i>
+      </div>
+
+      <h5 class="fw-bold">Portfolio Generator</h5>
+
+      <p class="text-muted">
+        Create an animated professional portfolio and download it as PDF.
+      </p>
+
+      <a href="/portfolio-generator" class="btn btn-outline-primary mt-auto">
+        🌐 Build Portfolio
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(234,179,8,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-bar-chart"></i>
+      </div>
+
+      <h5 class="fw-bold">Analytics</h5>
+
+      <p class="text-muted">
+        Track resume readiness, interviews, scores and placement preparation progress.
+      </p>
+
+      <a href="/analytics" class="btn btn-outline-primary mt-auto">
+        📈 View Analytics
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-xl-4 mb-4">
+
+    <div class="card card-hover p-4 h-100" style="border-color: rgba(148,163,184,0.65) !important;">
+
+      <div class="icon-box">
+        <i class="bi bi-clock-history"></i>
+      </div>
+
+      <h5 class="fw-bold">Interview History</h5>
+
+      <p class="text-muted">
+        Review your previous interview attempts, scores and improvement progress.
+      </p>
+
+      <a href="/interview-history" class="btn btn-outline-primary mt-auto">
+        📊 View History
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="card p-4 mt-2">
+
+  <div class="row align-items-center">
+
+    <div class="col-lg-8">
+
+      <h4 class="fw-bold mb-2">
+        About AI Career Copilot
+      </h4>
+
+      <p class="text-muted mb-lg-0">
+        A full-stack AI-powered career platform built for engineering students using Flask,
+        Gemini AI, SQLAlchemy, Bootstrap, GitHub and Render.
+      </p>
+
+    </div>
+
+    <div class="col-lg-4 text-lg-end">
+
+      <a href="/about" class="btn btn-primary">
+        View Project Details
+      </a>
 
     </div>
 

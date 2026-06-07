@@ -2,147 +2,414 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed, #06b6d4);
+        color: white;
+        border-radius: 25px;
+        padding: 60px 35px;
+        position: relative;
+        overflow: hidden;
+    }
 
-    <div class="card shadow-lg p-5">
+    .about-hero::before {
+        content: "";
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        top: -80px;
+        right: -60px;
+        animation: float 6s ease-in-out infinite;
+    }
 
-        <h1 class="text-primary mb-4">
-            🚀 AI Career Copilot
-        </h1>
+    .about-hero::after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+        bottom: -70px;
+        left: -50px;
+        animation: float 7s ease-in-out infinite;
+    }
 
-        <p class="lead">
-            AI Career Copilot is an intelligent placement preparation and career guidance platform
-            developed to help students assess their skills, improve their resumes, prepare for interviews,
-            generate personalized career roadmaps, and build industry-ready portfolios.
-        </p>
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+        100% { transform: translateY(0px); }
+    }
 
-        <hr>
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
 
-        <h2 class="mt-4">🎯 Project Vision</h2>
+    .feature-card {
+        border: none;
+        border-radius: 18px;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
 
-        <p>
-            Many students struggle with placement preparation because they do not know
-            what skills they are missing, which projects to build, or how to prepare effectively.
-            AI Career Copilot solves this problem by bringing resume analysis, interview practice,
-            skill assessment, project recommendations, and portfolio generation into a single platform.
-        </p>
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
 
-        <hr>
+    .stat-card {
+        border-radius: 18px;
+        border: none;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
 
-        <h2 class="mt-4">✨ Core Features</h2>
+    .stat-card:hover {
+        transform: scale(1.04);
+    }
 
-        <div class="row mt-4">
+    .timeline-step {
+        border-left: 4px solid #4f46e5;
+        padding-left: 20px;
+        margin-bottom: 25px;
+    }
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>📄 Resume Analyzer</h4>
-                    <p>
-                        Upload resumes and receive ATS scores, skill analysis,
-                        keyword matching, and improvement suggestions.
-                    </p>
-                </div>
-            </div>
+    .tech-badge {
+        padding: 10px 15px;
+        border-radius: 25px;
+        margin: 5px;
+        display: inline-block;
+        background: #eef2ff;
+        color: #3730a3;
+        font-weight: 600;
+    }
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>🤖 AI Mentor Chat</h4>
-                    <p>
-                        Ask career-related questions and receive AI-powered guidance,
-                        learning recommendations, and placement advice.
-                    </p>
-                </div>
-            </div>
+    .developer-card {
+        border-radius: 20px;
+        background: linear-gradient(135deg, #f8fafc, #eef2ff);
+        border: none;
+    }
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>🚀 Career Roadmap Generator</h4>
-                    <p>
-                        Generate structured learning paths based on your dream role
-                        and career goals.
-                    </p>
-                </div>
-            </div>
+    .fade-up {
+        animation: fadeUp 0.8s ease both;
+    }
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>🎤 Mock Interview System</h4>
-                    <p>
-                        Practice interview questions and receive performance feedback
-                        to improve communication and technical skills.
-                    </p>
-                </div>
-            </div>
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>📊 Placement Analytics</h4>
-                    <p>
-                        Track ATS scores, interview performance, readiness level,
-                        and overall placement preparation progress.
-                    </p>
-                </div>
-            </div>
+<div class="container mt-4 mb-5">
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>🎯 Skill Gap Analyzer</h4>
-                    <p>
-                        Compare current skills against target roles and identify
-                        missing skills that need improvement.
-                    </p>
-                </div>
-            </div>
+    <div class="about-hero shadow-lg fade-up">
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>💡 Project Recommendation Engine</h4>
-                    <p>
-                        Get role-specific project ideas, required skills,
-                        learning resources, and salary insights.
-                    </p>
-                </div>
-            </div>
+        <div class="hero-content text-center">
 
-            <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm">
-                    <h4>🌐 Portfolio Generator</h4>
-                    <p>
-                        Create professional portfolio content to showcase skills,
-                        projects, and achievements.
-                    </p>
-                </div>
+            <h1 class="display-5 fw-bold">
+                🚀 AI Career Copilot
+            </h1>
+
+            <p class="lead mt-3">
+                An AI-powered career growth platform designed to help engineering students
+                analyze resumes, identify skill gaps, prepare for interviews, generate roadmaps,
+                discover projects, and become placement-ready.
+            </p>
+
+            <div class="mt-4">
+
+                <a href="/dashboard" class="btn btn-light btn-lg me-2">
+                    Go to Dashboard
+                </a>
+
+                <a href="/upload_resume" class="btn btn-outline-light btn-lg">
+                    Analyze Resume
+                </a>
+
             </div>
 
         </div>
 
-        <hr>
+    </div>
 
-        <h2>🛠 Technologies Used</h2>
+    <div class="row text-center mt-5">
 
-        <ul>
-            <li>Python</li>
-            <li>Flask</li>
-            <li>SQLite</li>
-            <li>SQLAlchemy</li>
-            <li>Bootstrap</li>
-            <li>HTML, CSS, JavaScript</li>
-            <li>Google Gemini AI</li>
-        </ul>
+        <div class="col-md-3 mb-3">
+            <div class="card stat-card shadow p-4">
+                <h2 class="text-primary fw-bold">15+</h2>
+                <p class="text-muted mb-0">Career Roles</p>
+            </div>
+        </div>
 
-        <hr>
+        <div class="col-md-3 mb-3">
+            <div class="card stat-card shadow p-4">
+                <h2 class="text-success fw-bold">100+</h2>
+                <p class="text-muted mb-0">Project Ideas</p>
+            </div>
+        </div>
 
-        <h2>👩‍💻 Developer</h2>
+        <div class="col-md-3 mb-3">
+            <div class="card stat-card shadow p-4">
+                <h2 class="text-warning fw-bold">6+</h2>
+                <p class="text-muted mb-0">AI Modules</p>
+            </div>
+        </div>
 
-        <p>
-            Developed by <strong>Alikya Mamidala</strong>
+        <div class="col-md-3 mb-3">
+            <div class="card stat-card shadow p-4">
+                <h2 class="text-danger fw-bold">Live</h2>
+                <p class="text-muted mb-0">Cloud Deployment</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0 p-5 mt-5 fade-up">
+
+        <h2 class="mb-3">🎯 Project Vision</h2>
+
+        <p class="lead">
+            Many students struggle with placement preparation because they are unsure
+            about required skills, resume quality, suitable projects, and interview readiness.
+            AI Career Copilot brings all these needs into one intelligent platform.
         </p>
 
         <p>
-            AI Career Copilot was built to help students become industry-ready and
-            improve their placement success through AI-powered career guidance.
+            The goal of this project is to provide personalized career guidance through
+            specialized AI-driven modules such as Resume Expert, Interview Coach,
+            Skill Gap Analyst, Roadmap Planner, and Project Mentor.
         </p>
 
     </div>
+
+    <h2 class="text-center mt-5 mb-4">
+        ✨ Core Features
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>📄 AI Resume Expert</h4>
+                <p>
+                    Upload resumes and receive ATS-style score, strengths,
+                    weak areas, missing skills, role recommendations,
+                    and resume improvement suggestions.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🤖 AI Career Mentor</h4>
+                <p>
+                    Ask role-specific career questions and get expert-style guidance
+                    for AI, development, data, cloud, security, and other roles.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🚀 Roadmap Generator</h4>
+                <p>
+                    Generate 30-day, 3-month, 6-month, or 12-month learning roadmaps
+                    based on your selected career role and current skills.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🎤 Mock Interview System</h4>
+                <p>
+                    Practice role-based interview questions with difficulty levels,
+                    instant scoring, and feedback for improvement.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🎯 Skill Gap Analyzer</h4>
+                <p>
+                    Compare current skills with target role requirements and identify
+                    missing skills with improvement recommendations.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>💡 AI Project Recommender</h4>
+                <p>
+                    Get beginner, intermediate, advanced, or mixed project ideas
+                    for different roles with AI-generated unique suggestions.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>📊 Placement Analytics</h4>
+                <p>
+                    Track resume score, interview attempts, readiness level,
+                    and overall placement preparation progress.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🌐 Portfolio Generator</h4>
+                <p>
+                    Generate professional portfolio content to showcase skills,
+                    projects, certifications, and achievements.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card feature-card shadow p-4">
+                <h4>🗂 History Tracking</h4>
+                <p>
+                    Store and review interview history, resume analysis records,
+                    and user progress data for continuous improvement.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0 p-5 mt-5">
+
+        <h2 class="mb-4">🧭 How It Works</h2>
+
+        <div class="timeline-step">
+            <h5>Step 1: Create an Account</h5>
+            <p>Register and access your personalized AI Career Copilot dashboard.</p>
+        </div>
+
+        <div class="timeline-step">
+            <h5>Step 2: Analyze Your Resume</h5>
+            <p>Upload your resume and get ATS-style score, strengths, gaps, and improvements.</p>
+        </div>
+
+        <div class="timeline-step">
+            <h5>Step 3: Identify Skill Gaps</h5>
+            <p>Select your target role and compare your current skills with required skills.</p>
+        </div>
+
+        <div class="timeline-step">
+            <h5>Step 4: Generate Roadmap</h5>
+            <p>Create a clear learning plan for 30 days, 3 months, 6 months, or 12 months.</p>
+        </div>
+
+        <div class="timeline-step">
+            <h5>Step 5: Practice Interviews</h5>
+            <p>Prepare with role-specific mock interview questions and performance feedback.</p>
+        </div>
+
+        <div class="timeline-step">
+            <h5>Step 6: Build Projects</h5>
+            <p>Use the project recommender to build resume-worthy projects and deploy them online.</p>
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0 p-5 mt-5 text-center">
+
+        <h2>🛠 Technologies Used</h2>
+
+        <div class="mt-3">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Flask</span>
+            <span class="tech-badge">SQLite</span>
+            <span class="tech-badge">SQLAlchemy</span>
+            <span class="tech-badge">Bootstrap</span>
+            <span class="tech-badge">HTML</span>
+            <span class="tech-badge">CSS</span>
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">Google Gemini AI</span>
+            <span class="tech-badge">GitHub</span>
+            <span class="tech-badge">Render</span>
+        </div>
+
+    </div>
+    <div class="card developer-card shadow-lg p-5 mt-5 text-center">
+
+    <h2>👨‍💻 Development Team</h2>
+
+    <p class="text-muted mt-2">
+        Collaborative Full Stack AI Project
+    </p>
+
+    <div class="row mt-4">
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card p-4 h-100">
+
+                <h4>Alikya Mamidala</h4>
+
+                <p class="text-primary fw-semibold">
+                    B.Tech Computer Science and Engineering (CSE)
+                </p>
+
+                <p>
+                    Lead Developer responsible for AI integration,
+                    Resume Analyzer, AI Mentor Chat, Career Roadmap,
+                    Portfolio Generator, backend development,
+                    database integration, and project architecture.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card p-4 h-100">
+
+                <h4>Karthikeya Sunkara</h4>
+
+                <p class="text-primary fw-semibold">
+                    B.Tech Computer Science and Design (CSD)
+                </p>
+
+                <p>
+                    Contributed to UI/UX design, feature enhancement,
+                    system optimization, testing, module improvements,
+                    and overall project development and validation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+
+        <span class="badge bg-primary p-3 me-2">
+            Team Size: 2 Members
+        </span>
+
+        <span class="badge bg-success p-3">
+            AI-Powered Career Guidance Platform
+        </span>
+
+    </div>
+
+</div>
 
 </div>
 
